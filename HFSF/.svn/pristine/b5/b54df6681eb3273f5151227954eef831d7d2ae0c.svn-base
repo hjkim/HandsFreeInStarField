@@ -1,0 +1,39 @@
+package com.sinc.hfsf.park.vo;
+
+public class ParkVO {
+	
+	private String carNo;
+	private String carFloor;
+	private String carLoc;
+	
+	public ParkVO(String carNo, String carFloor, String carLoc) {
+		super();
+		this.carNo = carNo;
+		this.carFloor = carFloor;
+		this.carLoc = carLoc;
+	}
+	
+	public ParkVO() {}
+	
+	public String getCarNo() {
+		return carNo;
+	}
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+	public String getCarFloor() {
+		return carFloor;
+	}
+	public void setCarFloor(String carFloor) {
+		this.carFloor = carFloor;
+	}
+	public String getCarLoc() {
+		return carLoc;
+	}
+	public void setCarLoc(String carLoc) {
+		this.carLoc = carLoc;
+	}
+	
+	
+
+}

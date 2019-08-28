@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="qr">
+
+
+	<select id="getQrInfo" resultType="com.sinc.hfsf.qr.vo.QrVO" parameterType="String">
+		SELECT 	QR_ID,
+				PICKUP_ID,
+				QR_DATE,
+				TOTAL_PRICE,
+				CUSTOMER_ID
+		FROM 	QR_INFO
+		WHERE 	QR_ID = #{qr_id}
+	</select>
+
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sinc.android">
+	<select id="selectItem" resultType="sincMap">
+		SELECT 
+    		PROD_ID,
+    		PROD_NAME,
+    		PROD_PRICE,
+    		PROD_TAGGABLE,
+    		PROD_IMG_DIR
+		FROM PRODUCT
+		WHERE PROD_ID = #{prod_id}
+	</select>
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+

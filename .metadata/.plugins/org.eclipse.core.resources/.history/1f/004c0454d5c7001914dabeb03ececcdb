@@ -1,0 +1,7 @@
+package com.sinc.hfsf.admin.vo;
+
+public class AdminVO {
+	private String odr_state;
+	
+	
+}

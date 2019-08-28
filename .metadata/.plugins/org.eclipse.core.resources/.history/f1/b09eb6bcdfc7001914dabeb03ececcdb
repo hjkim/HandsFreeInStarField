@@ -1,0 +1,21 @@
+package com.sinc.hfsf.admin.vo;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+@Repository("adminD")
+public class AdminDAO {
+	@Resource(name="sqlSession")
+	private SqlSession session;
+	
+	
+	public List<AdminVO> printRow() {
+		
+		return session.selectList("com.admin.list");
+		
+	}
+}

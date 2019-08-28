@@ -1,0 +1,28 @@
+package com.sinc.hfsf.basket.vo;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+import com.sinc.hfsf.park.vo.ParkVO;
+
+@Repository
+public class ProductDAO {
+
+	@Resource
+	private SqlSession session;
+
+	public List<ProductVO> getProductList(ProductVO paramVO) {
+		return session.selectList("product.getProductList", paramVO);
+	}
+
+	public void insertOrders(ArrayList<ProductVO> list) {
+		session.insert("product.insertOrders", list);
+		
+	}
+	
+}

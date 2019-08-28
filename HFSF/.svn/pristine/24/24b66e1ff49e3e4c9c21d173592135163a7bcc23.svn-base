@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.sinc.hfsf.Map" alias="sincMap"/>
+		<typeAlias type="com.sinc.hfsf.park.vo.ParkVO" alias="parkVO"/>
+		<typeAlias type="com.sinc.hfsf.basket.vo.ProductVO" alias="productVO"/>
+	</typeAliases>
+	
+</configuration>
+

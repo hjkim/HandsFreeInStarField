@@ -1,0 +1,15 @@
+package com.sinc.hfsf.basket.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.sinc.hfsf.basket.vo.ProductVO;
+import com.sinc.hfsf.park.vo.ParkVO;
+
+public interface BasketService {
+
+	List<ProductVO> getProductList(ProductVO paramVO);
+
+	void insertOrders(ArrayList<ProductVO> list);
+
+}

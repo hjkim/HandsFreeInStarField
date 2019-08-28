@@ -1,0 +1,41 @@
+var ctx = document.getElementById("myPieChart");
+var data = [];
+var datas = [];
+	 
+	 
+function renderChart(data){
+	
+}
+var myPieChart = new Chart(ctx, {
+	   type: 'bar',
+	   data: {
+	     labels: ["1시간", "2시간", "3시간","4시간","5시간","6시간","7시간","8시간","9시간","10시간"],
+	     datasets: [{
+	       data: [${hour1},${hour2},${hour3},${hour4},${hour5},${hour6},${hour7},${hour8},${hour9},${hour10}],
+	       backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745','#F5F5DC','#FFD700','#808080','#F08080','#90EE90','#87CEFA'],
+	     }],
+	   },
+	 });
+	 
+	 
+
+	 
+function getData(input, datas){
+	$.ajax({
+		url			: "/getPickUpAreaData.do",
+		type		: "post",
+		data		: { id : input},
+		dataType	: "json",
+		async		: false,
+		success		: function(data){
+			for (var i in data){
+				datas.push(data[i]);
+			}
+			update(datas)
+		}
+	});
+}
+
+function update(inputData){
+	data = inputData
+}

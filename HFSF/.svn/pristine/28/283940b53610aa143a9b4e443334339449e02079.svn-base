@@ -1,0 +1,95 @@
+package com.sinc.hfsf.basket.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.mysql.cj.x.json.JsonArray;
+import com.sinc.hfsf.basket.service.BasketService;
+import com.sinc.hfsf.basket.vo.ProductVO;
+import com.sinc.hfsf.park.service.ParkService;
+import com.sinc.hfsf.park.vo.ParkVO;
+
+@Controller
+public class BasketController {
+	
+	@Resource
+	private BasketService service;
+	
+	@RequestMapping(value="/getProduct.do", method=RequestMethod.POST ,produces = "application/json")
+	@ResponseBody
+	public JSONArray getPark(String prodId) {
+		
+		System.out.println("prodId ============ " + prodId);
+		
+		ProductVO paramVO = new ProductVO();
+		paramVO.setProdId(prodId);
+		
+		List<ProductVO> list = service.getProductList(paramVO);
+		
+		JSONArray jArr = new JSONArray();
+		
+		for(int i=0;i<list.size();i++) {
+			JSONObject jObj = new JSONObject();
+			jObj.put("prodId", list.get(i).getProdId());
+			jObj.put("prodName", list.get(i).getProdName());
+			jObj.put("prodPrice", list.get(i).getProdPrice());
+			jObj.put("prodTaggable", list.get(i).isProdTaggable());
+			jObj.put("prodImgDir", list.get(i).getProdImgDir());
+			jArr.add(jObj);
+		}
+		
+		return jArr;
+	}
+	
+
+	@RequestMapping(value="/submitBasket.do", method=RequestMethod.POST ,produces = "application/json")
+	@ResponseBody
+	public String submitBasket(String params) {
+		System.out.println(params);
+
+		JSONParser jParser = new JSONParser();
+		JSONArray jArr = null;
+		
+		ArrayList<ProductVO> list = new ArrayList<ProductVO>();
+		
+		try {
+			jArr = (JSONArray)jParser.parse(params);
+			for(int i=0; i<jArr.size(); i++) {
+				JSONObject jObj = (JSONObject) jArr.get(i);
+				
+				String prodId = jObj.get("prodId").toString();
+				String prodName = jObj.get("prodName").toString();
+				int prodPrice = Integer.parseInt(jObj.get("prodPrice").toString());
+				boolean prodTaggable = jObj.get("prodTaggable").toString().equals("1")? true:false;
+				String prodImgDir = jObj.get("prodImgDir").toString();
+				int prodQty = Integer.parseInt(jObj.get("prodId").toString());
+				
+				ProductVO vo = new ProductVO(prodId,prodName,prodPrice,prodTaggable,prodImgDir,prodQty);
+				list.add(vo);
+			}
+			service.insertOrders(list);
+			System.out.println(list);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return "hi:hi";
+	}
+
+
+}

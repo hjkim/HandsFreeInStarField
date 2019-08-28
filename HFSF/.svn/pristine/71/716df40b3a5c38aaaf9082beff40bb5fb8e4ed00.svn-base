@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="park">
+
+	<resultMap type="parkVO" id="parkMap">
+		<result column="CAR_NO" property="carNo"/>
+		<result column="CAR_FLOOR" property="carFloor"/>
+		<result column="CAR_LOC" property="carLoc"/>
+	</resultMap>
+	
+
+	<select id="getParkList" resultMap="parkMap" parameterType="parkVO">
+		SELECT CAR_NO, CAR_FLOOR, CAR_LOC FROM CAR WHERE CAR_NO LIKE '%'||#{carNo}||'%'
+	</select>
+
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+

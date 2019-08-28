@@ -1,0 +1,45 @@
+package com.sinc.hfsf.admin.ctrl;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.sinc.hfsf.Map;
+import com.sinc.hfsf.admin.service.AdminService;
+import com.sinc.hfsf.admin.vo.AdminVO;
+
+@Controller
+public class AdminController {
+	@Resource(name="adminS")
+	private AdminService service;
+	
+	@RequestMapping(value="/admin.do", method=RequestMethod.GET)
+	public String print(ModelMap model) {
+		List<AdminVO> list = service.printService();
+		model.addAttribute("list",list);
+		return "/admin";
+	}
+	
+	@RequestMapping(value="/index.do", method=RequestMethod.GET)
+	public String home(ModelMap model) {
+		//SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss", Locale.KOREAN);
+		Map hashMap = service.pickupTimeService();
+		//model.addAttribute("pickupMap",hashMap);
+		System.out.println("here!!!!!!!!!!!!!!!!!!" + hashMap.get(3) + " " + hashMap.get(hashMap.get(3)));
+		model.addAllAttributes(hashMap);
+		
+		//Map hashMap2 = service.pickupTermService();
+		//model.addAllAttributes(hashMap2);
+		//model.addAllObjects(hashMap);
+		return "/index";
+	}
+	
+	
+}

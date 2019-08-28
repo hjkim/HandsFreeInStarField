@@ -1,0 +1,5 @@
+package com.sinc.hfsf.admin.vo;
+
+public class AdminDAO {
+
+}

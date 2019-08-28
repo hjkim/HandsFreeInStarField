@@ -1,0 +1,23 @@
+package com.sinc.hfsf.admin.ctrl;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.sinc.hfsf.admin.service.AdminService;
+
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+	@Resource(name="adminS")
+	private AdminService service;
+	
+	@RequestMapping(value="/admin.jsp", method=RequestMethod.GET)
+	public String print(ModelMap model) {
+		
+		return "/admin/admin";
+	}
+}

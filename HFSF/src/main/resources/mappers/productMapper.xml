@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+
+<mapper namespace="product">
+
+	<resultMap type="productVO" id="productMap">
+		<result column="PROD_ID" property="prodId"/>
+		<result column="PROD_NAME" property="prodName"/>
+		<result column="PROD_PRICE" property="prodPrice"/>
+		<result column="PROD_TAGGABLE" property="prodTaggable"/>
+		<result column="PROD_IMG_DIR" property="prodImgDir"/>
+	</resultMap>
+	
+
+	<select id="getProductList" resultMap="productMap" parameterType="productVO">
+		SELECT PROD_ID, PROD_NAME, PROD_PRICE, PROD_TAGGABLE, PROD_IMG_DIR FROM PRODUCT 
+		WHERE PROD_ID = #{prodId}
+		
+	</select>
+	
+	<select id="getProductListList" resultMap="productMap" parameterType="productVO">
+		SELECT PROD_ID, PROD_NAME, PROD_PRICE, PROD_TAGGABLE, PROD_IMG_DIR FROM PRODUCT 
+		WHERE PROD_ID in
+	    <foreach item="item" index="index" collection="list"
+	        open="(" separator="," close=")">
+	          #{item.prodId}
+	    </foreach>
+	</select>
+	
+	
+
+	
+	<insert id="insertOrders" parameterType="productVO">
+	  
+	  <foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL " close="SELECT * FROM DUAL" >
+	  	INTO ORDER_DETAIL (ODR_ID, PROD_ID, PROD_QTY, CUSTOMER_ID) VALUES
+           (
+                  #{item.odrId}
+                , #{item.prodId}                         
+                , #{item.prodQty}
+                , #{item.customerId}                               
+           )
+        </foreach>
+	  	
+	</insert>
+	
+	<select id="generateOdrId" resultType="java.lang.String">
+		SELECT ORDER_REQUEST_SEQ.nextval FROM DUAL
+	</select>
+	
+	<insert id="insertOrderRequest" parameterType="odrVO">
+		INSERT INTO ORDER_REQUEST (ODR_ID, PICKUP_ID, CUSTOMER_ID, ODR_DATE, ODR_STATE,TOKEN,TOTAL_PRICE)
+			VALUES (#{odrId}, #{pickupId}, #{customerId}, SYSDATE, '0', '0', #{totalPrice})	
+	</insert>
+
+
+
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+

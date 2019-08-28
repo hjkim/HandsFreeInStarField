@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+
+<mapper namespace="product">
+
+	<resultMap type="productVO" id="productMap">
+		<result column="PROD_ID" property="prodId"/>
+		<result column="PROD_NAME" property="prodName"/>
+		<result column="PROD_PRICE" property="prodPrice"/>
+		<result column="PROD_TAGGABLE" property="prodTaggable"/>
+		<result column="PROD_IMG_DIR" property="prodImgDir"/>
+	</resultMap>
+	
+
+	<select id="getProductList" resultMap="productMap" parameterType="productVO">
+		SELECT PROD_ID, PROD_NAME, PROD_PRICE, PROD_TAGGABLE, PROD_IMG_DIR FROM PRODUCT WHERE PROD_ID = #{prodId}
+	</select>
+	
+
+	
+	<insert id="insertOrders" parameterType="productVO">
+	  <selectKey keyProperty="qrId" resultType="int" order="BEFORE">
+	    select QR_SEQ.nextval FROM DUAL
+	  </selectKey>
+	  <foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL " close="SELECT * FROM DUAL" >
+	  	INTO ODR_LIST (QR_ID, PROD_ID, PROD_QTY) VALUES
+           (
+                  #{qrId}
+                , #{item.prodId}                         
+                , #{item.prodQty}                             
+           )
+        </foreach>
+	  	
+	</insert>
+
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
