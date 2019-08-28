@@ -1,13 +1,15 @@
-var ctx = document.getElementById("myBarChart");
-var barData = [];
+var ctx = document.getElementById("myChart4");
+var barData1 = [];
+var barData2 = [];
 var datas = [];
 	 
-window.onload = data(barData);
+window.onload = data(barData1, barData2);
 
-function data(barData){
+function data(barData1, barData2){
 
-	getData(barData);
-	renderChart(barData);
+	getData(1,barData1);
+	getData(2,barData2);
+	renderChart(barData1,barData2);
 }
 
 function chartData(data){
@@ -15,35 +17,57 @@ function chartData(data){
 	renaderChart(data);
 }
 	 
-function renderChart(barData){
+function renderChart(barData1, barData2){
 	var myPieChart = new Chart(ctx, {
 		   type: 'bar',
 		   data: {
 		     labels: ["1시간", "2시간", "3시간","4시간","5시간","6시간","7시간","8시간","9시간","10시간"],
 		     datasets: [{
-		       data: barData,
-		       backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745','#F5F5DC','#FFD700','#808080','#F08080','#90EE90','#87CEFA'],
-		     }],
+		    	label: '평일',
+		       data: barData1,
+		       borderColor: 'rgba(0, 76, 154, 1)',
+		       backgroundColor: 'rgba(0, 76, 154, 1)',
+		     },
+		     {
+		    	label: '주말',
+			   data: barData2,
+			   borderColor: 'rgba(255, 99, 132, 1)',
+			   backgroundColor: 'rgba(255, 99, 132, 1)',
+			  }
+		     ],
 		   },
+		   options:{
+			   title: {
+					display: true,
+					text: '픽업 소요 시간 '
+				}
+		   }
 		 });
 }
 	
 	 
-function getData(datas){
+function getData(input, datas){
 	$.ajax({
 		url			: "/getPickUpBarData.do",
 		type		: "post",
+		data		: {id : input},
 		dataType	: "json",
 		async		: false,
 		success		: function(data){
 			for (var i in data){
 				datas.push(data[i]);
 			}
-			update(datas)
+			update(input, datas)
 		}
 	});
 }
 
-function update(inputData){
+function update(num, inputData){
 	data = inputData
+	
+	if(num == 1){
+		barData1 = inputData;
+	}else{
+		barData2 = inputData;
+	}
 }

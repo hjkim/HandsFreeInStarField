@@ -15,8 +15,6 @@ window.onload = data(data1, data2);
 function data(data1, data2){
 	getData(1,data1);
 	getData(2,data2);
-	alert(data1);
-	alert(data2);
 	label = ['10-11시', '11-12시', '12-1시', '1-2시', '2-3시', '3-4시', '4-5시', '5-6시'];
 	renderChart(data1, data2, label);
 }
@@ -68,7 +66,6 @@ function getData(input,datas){
 			for (var i in data){
 				datas.push(data[i]);
 			}
-			alert(data);
 			update(input, datas)
 			
 		}

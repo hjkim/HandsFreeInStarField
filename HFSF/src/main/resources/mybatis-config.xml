@@ -11,6 +11,7 @@
 		<typeAlias type="com.sinc.hfsf.qr.vo.QrVO" alias="qrVO"/>
 		<typeAlias type="com.sinc.hfsf.user.vo.CustomerVO" alias="customerVO"/>
 		<typeAlias type="com.sinc.hfsf.admin.vo.AdminVO" alias="adminVO"/>
+		<typeAlias type="com.sinc.hfsf.basket.vo.DetailVO" alias="detailVO"/>
 	</typeAliases>
 	
 </configuration>

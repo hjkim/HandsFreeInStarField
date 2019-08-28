@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
 <html>
@@ -15,14 +17,14 @@
 					<h3 class="box-title">Packing List</h3>
 				</div>
 				<div class='box-body'>
-					<!-- 추가  -->
+					<!-- ì¶ê°  -->
 					<select name="searchType" id="searchType">
 						<option value="title">제목</option>
-						<option value="writer">작성자</option>
+						<option value="writer">작성자</option>
 					</select> 
 					<input type="text" name='searchKeyword' id="searchKeyword">
 					<button id='searchBtn'>Search</button>
-					<!-- 기존 -->
+					<!-- ê¸°ì¡´ -->
 					<button id='newBtn'>New Board</button>
 				</div>
 				

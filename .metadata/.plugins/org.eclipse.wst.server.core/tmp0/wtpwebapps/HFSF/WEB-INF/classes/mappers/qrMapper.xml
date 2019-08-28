@@ -7,13 +7,14 @@
 
 
 	<select id="getQrInfo" resultType="com.sinc.hfsf.qr.vo.QrVO" parameterType="String">
-		SELECT 	QR_ID,
+		SELECT  ODR_ID,
 				PICKUP_ID,
-				QR_DATE,
-				TOTAL_PRICE,
-				CUSTOMER_ID
-		FROM 	QR_INFO
-		WHERE 	QR_ID = #{qr_id}
+				CUSTOMER_ID,
+				ODR_DATE,
+				ODR_STATE,
+				TOTAL_PRICE
+		FROM 	ORDER_REQUEST
+		WHERE 	ODR_ID = #{ODR_ID}
 	</select>
 
 

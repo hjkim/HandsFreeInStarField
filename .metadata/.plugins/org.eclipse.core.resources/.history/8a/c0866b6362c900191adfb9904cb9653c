@@ -1,0 +1,45 @@
+package com.sinc.hfsf.admin.vo;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
+
+@Repository("adminD")
+public class AdminDAO {
+	@Resource(name="sqlSession")
+	private SqlSession session;
+	
+	
+	public List<AdminVO> printRow() {
+		
+		return session.selectList("com.sinc.admin.list");
+	}
+	
+	public Map graphDate(int i) {
+		if(i == 1) {
+			return session.selectOne("com.sinc.admin.weekDayOrder");
+		}else {
+			return session.selectOne("com.sinc.admin.weekendDayOrder");
+		}
+	}
+	
+	public Map graphDueTime(int i) {
+		if(i == 1) {
+			return session.selectOne("com.sinc.admin.WeekDaypackDueTime");
+		}else {
+			return session.selectOne("com.sinc.admin.WeekEndDaypackDueTime");
+		}
+	}
+	
+	 public Map pickupTime() {
+		  
+		  return session.selectOne("com.sinc.admin.pickuptime");
+		 }
+		 public Map pickupTerm() {
+		  return session.selectOne("com.sinc.admin.pickupterm");
+	}
+}

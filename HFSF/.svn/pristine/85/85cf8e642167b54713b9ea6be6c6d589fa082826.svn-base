@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../views/include/header.jsp"%>
+
+	<!-- ------------------------- -->
+    <div id="content-wrapper">
+
+	<div class="container-fluid">
+		<ul id="tabs">
+		    <li><a href="#" name="tab1">고객 주문 시간대 현황</a></li>
+		    <li><a href="#" name="tab2">주문 패킹 소요 시간 현황</a></li>
+		    <li><a href="#" name="tab3">시간 대별 픽업 현황</a></li>
+		    <li><a href="#" name="tab4">주문 - 픽업 소요시간 현황</a></li>    
+		</ul>
+		
+		<div id="content"> 
+		    <div id="tab1">
+		    	<div class="card mb-3">
+          			<div class="card-header">
+            			<i class="fas fa-chart-area"></i>
+                        	주문 시간대
+                   	 	</div>
+          				<div class="card-body">
+            			<canvas id="myChart" width="100%" height="30"></canvas>
+          				</div>
+          			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        		</div>
+		    
+		    </div>
+		    <div id="tab2">
+		    	<div class="card mb-3">
+          			<div class="card-header">
+            			<i class="fas fa-chart-area"></i>
+                        	패킹 준비 소요 시간
+                   	 	</div>
+          				<div class="card-body">
+            			<canvas id="myChart1" width="100%" height="30"></canvas>
+          				</div>
+          			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        		</div>
+		    </div>
+		    <div id="tab3">
+		    	<div class="card mb-3">
+          			<div class="card-header">
+            			<i class="fas fa-chart-area"></i>
+                        	주문 - 픽업 소요시간
+                   	 	</div>
+          				<div class="card-body">
+            			<canvas id="myChart3" width="100%" height="30"></canvas>
+          				</div>
+          			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        		</div>
+		    </div>
+		    <div id="tab4">
+		    	<div class="card mb-3">
+          			<div class="card-header">
+            			<i class="fas fa-chart-area"></i>
+                        	패킹 준비 소요 시간
+                   	 	</div>
+          				<div class="card-body">
+            			<canvas id="myChart4" width="100%" height="30"></canvas>
+          				</div>
+          			<div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+        		</div>
+		    </div>
+		</div>	  
+	</div>
+
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright @ SINC Intern 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+  </div>
+  <!-- Demo scripts for this page-->
+  
+  <!-- /#wrapper -->
+  <%@include file="../views/include/footer.jsp"%>
+  

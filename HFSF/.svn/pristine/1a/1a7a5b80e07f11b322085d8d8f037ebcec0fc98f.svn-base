@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+
+<mapper namespace="product">
+
+	<resultMap type="productVO" id="productMap">
+		<result column="PROD_ID" property="prodId"/>
+		<result column="PROD_NAME" property="prodName"/>
+		<result column="PROD_PRICE" property="prodPrice"/>
+		<result column="PROD_TAGGABLE" property="prodTaggable"/>
+		<result column="PROD_IMG_DIR" property="prodImgDir"/>
+		<result column="PROD_QTY" property="prodQty"/>
+	</resultMap>
+	
+
+	<select id="getProductList" resultMap="productMap" parameterType="productVO">
+		SELECT PROD_ID, PROD_NAME, PROD_PRICE, PROD_TAGGABLE, PROD_IMG_DIR FROM PRODUCT 
+		WHERE PROD_ID = #{prodId}
+		
+	</select>
+	
+	<select id="getProductListList" resultMap="productMap" parameterType="productVO">
+		SELECT PROD_ID, PROD_NAME, PROD_PRICE, PROD_TAGGABLE, PROD_IMG_DIR FROM PRODUCT 
+		WHERE PROD_ID in
+	    <foreach item="item" index="index" collection="list"
+	        open="(" separator="," close=")">
+	          #{item.prodId}
+	    </foreach>
+	</select>
+	
+	
+
+	
+	<insert id="insertOrders" parameterType="productVO">
+	  
+	  <foreach collection="list" item="item" index="index" separator=" " open="INSERT ALL " close="SELECT * FROM DUAL" >
+	  	INTO ORDER_DETAIL (ODR_ID, PROD_ID, PROD_QTY, CUSTOMER_ID) VALUES
+           (
+                  #{item.odrId}
+                , #{item.prodId}                         
+                , #{item.prodQty}
+                , #{item.customerId}                               
+           )
+        </foreach>
+	  	
+	</insert>
+	
+	<select id="generateOdrId" resultType="java.lang.String">
+		SELECT ORDER_REQUEST_SEQ.nextval FROM DUAL
+	</select>
+	
+	<insert id="insertOrderRequest" parameterType="odrVO">
+		INSERT INTO ORDER_REQUEST (ODR_ID, PICKUP_ID, CUSTOMER_ID, ODR_DATE, ODR_STATE,TOKEN,TOTAL_PRICE)
+			VALUES (#{odrId}, #{pickupId}, #{customerId}, SYSDATE, '0', '0', #{totalPrice})	
+	</insert>
+
+
+
+	 <resultMap id="odrMap" type="odrVO">
+		  <result column="ODR_ID" property="odrId"/>
+		  <result column="PICKUP_ID" property="pickupId"/>
+		  <result column="CUSTOMER_ID" property="customerId"/>
+		  <result column="ODR_DATE" property="odrDate"/>
+		  <result column="PACK_DATE" property="packDate"/>
+		  <result column="PICKUP_DATE" property="pickupDate"/>
+		  <result column="ODR_STATE" property="odrState"/>
+		  <result column="TOKEN" property="token"/>
+		  <result column="TOTAL_PRICE" property="totalPrice"/>
+	 </resultMap>
+
+
+	<select id="getOdrListByCusId" resultMap="odrMap" parameterType="java.lang.String">
+		SELECT ODR_ID, PICKUP_ID, CUSTOMER_ID,  ODR_DATE, PACK_DATE, PICKUP_DATE,  ODR_STATE, TOKEN, TOTAL_PRICE
+			FROM ORDER_REQUEST WHERE CUSTOMER_ID=#{customerId}
+	</select>
+
+	<select id="getHistoryProduct" resultMap="productMap" parameterType="java.lang.String">
+		SELECT A.PROD_ID, B.PROD_NAME, A.PROD_QTY, B.PROD_IMG_DIR FROM ORDER_DETAIL A, PRODUCT B
+		WHERE A.ODR_ID = #{odrId} and A.PROD_ID = B.PROD_ID
+	</select>
+	
+	<select id="getOrder" resultMap="odrMap" parameterType="String">
+		SELECT  ODR_ID,
+				PICKUP_ID,
+				CUSTOMER_ID,
+				ODR_DATE,
+				ODR_STATE,
+				TOTAL_PRICE
+		FROM 	ORDER_REQUEST
+		WHERE 	ODR_ID = #{odr_id}
+	</select> 
+	
+	<select id="getOrderListBeforePacking" resultMap="odrMap">
+		SELECT  ODR_ID,
+				PICKUP_ID,
+				CUSTOMER_ID,
+				ODR_DATE,
+				ODR_STATE,
+				TOTAL_PRICE
+		FROM 	ORDER_REQUEST
+		WHERE 	ODR_ID = 1
+	</select>
+
+	 <resultMap id="detailMap" type="detailVO">
+	  <result column="ODR_ID" property="odrId"/>
+	  <result column="PROD_ID" property="prodId"/>
+	  <result column="PROD_QTY" property="prodQty"/>
+	  <result column="CUSTOMER_ID" property="customerId"/>
+	 </resultMap>
+
+	<select id="getOrderDetailList" resultMap="detailMap" parameterType="String">
+		SELECT  ODR_ID,
+				PROD_ID,
+				PROD_QTY,
+				CUSTOMER_ID
+		FROM 	ORDER_DETAIL
+		WHERE 	ODR_ID = #{odr_id}
+	</select> 
+
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
