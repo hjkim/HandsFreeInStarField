@@ -26,7 +26,10 @@ public interface BasketService {
 	
 	OdrVO getOrder( String odr_id );
 	List<OdrVO> getOrderListBeforePacking();
+	List<OdrVO> getOrderListAfterPacking();
 	DetailVO getOrderDetail( String odr_id );
 	List<DetailVO> getOrderDetailList( String odr_id );
+	void odrPackComplete( String odr_id );
+	void odrPickupComplete( String odr_id );
 
 }

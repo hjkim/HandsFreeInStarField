@@ -74,4 +74,20 @@ public class BasketServiceImpl implements BasketService {
 	public List<DetailVO> getOrderDetailList( String odr_id ) {
 		return dao.getOrderDetailList(odr_id);
 	}
+
+	@Override
+	public List<OdrVO> getOrderListAfterPacking() {
+		return dao.getOrderListAfterPacking();
+	}
+
+	@Override
+	public void odrPackComplete(String odr_id) {
+		dao.odrPackComplete(odr_id);
+	}
+
+	@Override
+	public void odrPickupComplete(String odr_id) {
+		dao.odrPickupComplete(odr_id);
+	}
+	
 }

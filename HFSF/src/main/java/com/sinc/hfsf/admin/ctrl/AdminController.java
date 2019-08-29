@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sinc.hfsf.admin.service.AdminService;
 import com.sinc.hfsf.admin.vo.AdminVO;
+import com.sinc.hfsf.admin.vo.StockVO;
 
 @Controller
 public class AdminController {
@@ -91,5 +92,24 @@ public class AdminController {
 		}
 		return hmap;
 	 } 
+	
+	
+	@RequestMapping(value="/stockPage.do", method = RequestMethod.GET)
+	public String stock() {
+		return "/stockPage";
+	}
+	@RequestMapping(value="/getNowStock.do", method=RequestMethod.POST)
+	@ResponseBody
+	public Object getNowStock() {
+		List<StockVO> list = service.stockListService();
+		System.out.println(list);
+		System.out.println("Here~~~~~~~~~~~~~~~~");
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("data", list);
+		Object result =mp;
+		return result;
+	}
+	
+	
 	
 }

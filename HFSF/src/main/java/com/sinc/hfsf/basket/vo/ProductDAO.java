@@ -53,6 +53,10 @@ public class ProductDAO {
 	public List<OdrVO> getOrderListBeforePacking() {
 		return session.selectList( "product.getOrderListBeforePacking" );
 	}
+
+	public List<OdrVO> getOrderListAfterPacking() {
+		return session.selectList( "product.getOrderListAfterPacking" );
+	}
 	
 	public DetailVO getOrderDetail( String odr_id ) {
 		return session.selectOne( "product.getOrderDetail", odr_id );
@@ -60,5 +64,13 @@ public class ProductDAO {
 
 	public List<DetailVO> getOrderDetailList( String odr_id ) {
 		return session.selectList( "product.getOrderDetailList", odr_id );
+	}
+	
+	public void odrPackComplete( String odr_id ) {
+		session.update( "product.odrPackComplete", odr_id );
+	}	
+	
+	public void odrPickupComplete( String odr_id ) {
+		session.update( "product.odrPickupComplete", odr_id );
 	}
 }

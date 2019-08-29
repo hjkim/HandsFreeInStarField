@@ -53,4 +53,8 @@ public class AdminDAO {
 		}
 		  
 	}
+	public List<StockVO> stockList() {
+		
+		return session.selectList("com.sinc.admin.stockList");
+	}
 }

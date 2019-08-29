@@ -141,11 +141,30 @@ public class BasketController {
 	public String getOrderListBeforePacking(ModelMap model, HttpServletRequest req) {
 		
 		List<OdrVO> odrListBeforePacking = service.getOrderListBeforePacking();
-		// System.out.println( odrListBeforePacking.get(0).getOdrId() );
-		model.addAttribute("odrList", odrListBeforePacking);
+		model.addAttribute("odrListBeforePacking", odrListBeforePacking);
+		// System.out.println("DEBUG : " + odrListBeforePacking.get(0).getOdrId());
+
+		List<OdrVO> odrListAfterPacking = service.getOrderListAfterPacking();
+		model.addAttribute("odrListAfterPacking", odrListAfterPacking);
 				
 		return "/orderManageBoard";
 	}
-
+	
+	@RequestMapping(value="/odrPackComplete.do", method=RequestMethod.GET)
+	public String odrPackComplete( HttpServletRequest req ) {
+		
+		String odr_id = req.getQueryString(); 
+		service.odrPackComplete(odr_id);
+		
+		return "redirect:orderManageBoard.do";
+	}
+	@RequestMapping(value="/odrPickupComplete.do", method=RequestMethod.GET)
+	public String odrPickupComplete( HttpServletRequest req ) {
+		
+		String odr_id = req.getQueryString(); 
+		service.odrPickupComplete(odr_id);
+		
+		return "redirect:orderManageBoard.do";
+	}
 
 }

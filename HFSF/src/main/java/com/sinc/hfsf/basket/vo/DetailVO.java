@@ -6,17 +6,19 @@ public class DetailVO {
 	private String prodId;
 	private int prodQty;
 	private String customerId;
+	private String prodName;
 	
 	public DetailVO() {
 		super();
 	}
 
-	public DetailVO(String odrId, String prodId, int prodQty, String customerId) {
+	public DetailVO(String odrId, String prodId, int prodQty, String customerId, String prodName) {
 		super();
 		this.odrId = odrId;
 		this.prodId = prodId;
 		this.prodQty = prodQty;
 		this.customerId = customerId;
+		this.prodName = prodName;
 	}
 
 	public String getOdrId() {
@@ -50,5 +52,15 @@ public class DetailVO {
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
+
+	public String getProdName() {
+		return prodName;
+	}
+
+	public void setProdName(String prodName) {
+		this.prodName = prodName;
+	}
+	
+	
 	
 }

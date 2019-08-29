@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sinc.hfsf.admin.vo.AdminDAO;
 import com.sinc.hfsf.admin.vo.AdminVO;
+import com.sinc.hfsf.admin.vo.StockVO;
 
 @Service("adminS")
 public class AdminService {
@@ -35,5 +36,8 @@ public class AdminService {
 		 }
 	 public Map pickupTermService(int i) {
 		  return dao.pickupTerm(i);
+	}
+	 public List<StockVO> stockListService() {
+		  return dao.stockList();
 	}
 }
